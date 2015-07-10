@@ -10,9 +10,12 @@ $app = Spark\Application::boot($injector);
 $init = $injector->make('App\Bootstrap');
 $init->boot();
 
+$injector->alias('Spark\Auth\AbstractAuthenticator', 'App\Data\Authenticator');
+
 $app->setMiddleware([
     'Relay\Middleware\ResponseSender',
     'Spark\Handler\ExceptionHandler',
+    'Spark\Auth\AuthHandler',
     'Spark\Handler\RouteHandler',
     'Spark\Handler\ActionHandler',
 ]);
